@@ -1,7 +1,21 @@
 """
 Theme Loader for Yourdio
-Loads YAML theme files and provides them to RetroMIDIComposer
+
+Loads and validates YAML theme configuration files for the RetroMIDIComposer.
+
+This module handles:
+- Loading YAML theme files from disk
+- Merging partial themes with default values
+- Validating theme structure
+- Providing default theme configurations
+
+Author: Yourdio Contributors
+License: MIT
 """
+
+__version__ = "1.0.1"
+__author__ = "Yourdio Contributors"
+__license__ = "MIT"
 
 import yaml
 from pathlib import Path

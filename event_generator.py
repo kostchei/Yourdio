@@ -1,8 +1,28 @@
 #!/usr/bin/env python3
 """
 Event-Based Soundscape Generator for Yourdio
-Generate short, loopable musical moments for specific game events
+
+Generate short, loopable musical moments for specific game events.
+
+This module creates brief MIDI soundscapes (1-4 minutes) tailored for
+interactive media events such as:
+- Combat encounters
+- Stealth sequences
+- Tavern ambiance
+- Victory fanfares
+- Exploration moments
+- Boss battles
+
+Each event type applies specific modifications to the base theme to
+create appropriate mood and intensity.
+
+Author: Yourdio Contributors
+License: MIT
 """
+
+__version__ = "1.0.1"
+__author__ = "Yourdio Contributors"
+__license__ = "MIT"
 
 from pathlib import Path
 from typing import Optional

@@ -1,5 +1,11 @@
-midiutil>=1.2.1
-numpy>=1.21.0
-pyyaml>=6.0
-pygame>=2.1.0
-pyinstaller>=5.0
+# Yourdio - Core Dependencies
+#
+# For development, install with: pip install -e ".[dev]"
+# For audio analysis features: pip install -e ".[audio-analysis]"
+# For building executables: pip install -e ".[build]"
+
+# Core runtime dependencies
+midiutil>=1.2.1      # MIDI file generation
+numpy>=1.21.0        # Mathematical operations and array handling
+pyyaml>=6.0          # YAML theme file parsing
+pygame>=2.1.0        # MIDI playback functionality

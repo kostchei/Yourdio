@@ -1,8 +1,25 @@
 #!/usr/bin/env python3
 """
 Yourdio: Retro Lo-Fi Algorithmic Composer
-Generate 6-hour ambient music compositions using prime numbers and chaos theory
+
+Generate 6-hour ambient music compositions using prime numbers and chaos theory.
+
+This module implements the core RetroMIDIComposer class which generates MIDI files
+using mathematical algorithms including:
+- Prime number sequences for rhythm generation
+- Fibonacci patterns for timing
+- Lorenz attractor for harmonic motion
+- Logistic map for chaos-driven variation
+- Modal music theory (Dorian, Aeolian, Phrygian)
+- Structural arc system for long-form composition
+
+Author: Yourdio Contributors
+License: MIT
 """
+
+__version__ = "1.0.1"
+__author__ = "Yourdio Contributors"
+__license__ = "MIT"
 
 import midiutil
 from midiutil import MIDIFile

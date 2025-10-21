@@ -1,8 +1,27 @@
 #!/usr/bin/env python3
 """
 Yourdio GUI - Retro Lo-Fi Music Generator
-Classic Winamp-inspired interface for generating algorithmic music
+
+Classic Winamp-inspired graphical interface for generating algorithmic music.
+
+This module provides a desktop GUI application with two main features:
+1. Theme Generator: Create 6-hour MIDI compositions (12 x 30-minute chapters)
+2. Event Soundscapes: Generate short loopable event music for games
+
+Features:
+- Visual theme parameter editing
+- YAML theme import/export
+- Real-time generation status
+- Retro dark/green aesthetic
+- Cross-platform compatibility (Windows, macOS, Linux)
+
+Author: Yourdio Contributors
+License: MIT
 """
+
+__version__ = "1.0.1"
+__author__ = "Yourdio Contributors"
+__license__ = "MIT"
 
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox, scrolledtext
