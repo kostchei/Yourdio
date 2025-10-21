@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Optional
 import argparse
 
-from yourdio import RetroMIDIComposer, MIDIFile
+from yourdio import RetroMIDIComposer
 from theme_loader import ThemeLoader
 
 
@@ -122,9 +122,9 @@ class EventSoundscapeGenerator:
         # Generate MIDI
         midi = composer.create_chapter_midi(
             chapter_id=0,
-            duration_minutes=config["duration_minutes"],
-            prime_sequence=config["primes"],
-            chaos_seed=config["chaos_seed"],
+            duration_minutes=float(config["duration_minutes"]),  # type: ignore[arg-type]
+            prime_sequence=list(config["primes"]),  # type: ignore[call-overload]
+            chaos_seed=float(config["chaos_seed"]),  # type: ignore[arg-type]
         )
 
         # Determine output path
@@ -168,7 +168,7 @@ class EventSoundscapeGenerator:
         theme_name = theme.get("name", "Default")
 
         print(f"\n{'='*60}")
-        print(f"YOURDIO EVENT SOUNDSCAPE GENERATOR")
+        print("YOURDIO EVENT SOUNDSCAPE GENERATOR")
         print(f"{'='*60}")
         print(f"Theme: {theme_name}")
         print(f"Generating {len(events)} event soundscapes")
@@ -200,7 +200,7 @@ class EventSoundscapeGenerator:
     @classmethod
     def list_events(cls):
         """List all available event types"""
-        print(f"\nAvailable Event Types:")
+        print("\nAvailable Event Types:")
         print(f"{'='*60}")
         for event_type, config in cls.EVENT_CONFIGS.items():
             duration = config["duration_minutes"]

@@ -21,12 +21,10 @@ __version__ = "1.0.1"
 __author__ = "Yourdio Contributors"
 __license__ = "MIT"
 
-import midiutil
 from midiutil import MIDIFile
 import numpy as np
 from typing import List, Dict, Tuple, Optional
 from pathlib import Path
-import sys
 
 # Import theme loader
 from theme_loader import ThemeLoader
@@ -105,7 +103,7 @@ class RetroMIDIComposer:
         else:
             self.max_polyphony = 32  # Default
 
-        self.active_notes = []  # Track (end_time, pitch, channel)
+        self.active_notes: List[Tuple[float, int, int]] = []  # Track (end_time, pitch, channel)
 
     def _build_scale(self, mode: str, custom_scale: Optional[List[int]] = None) -> List[int]:
         """Build MIDI note numbers for modal scale"""
@@ -211,7 +209,7 @@ class RetroMIDIComposer:
 
         if track < len(track_names):
             track_name = track_names[track]
-            return ensemble.get(track_name, 89)
+            return int(ensemble.get(track_name, 89))
 
         return 89  # Default fallback
 
@@ -475,7 +473,7 @@ class RetroMIDIComposer:
 
 
 def calculate_chapter_intensity(
-    chapter: int, total_chapters: int = 12, arc_config: Dict = None
+    chapter: int, total_chapters: int = 12, arc_config: Optional[Dict] = None
 ) -> float:
     """
     Calculate intensity for chapter to create dramatic arc
@@ -518,10 +516,10 @@ def calculate_chapter_intensity(
 
     # Scale to intensity range
     intensity = min_val + (max_val - min_val) * np.clip(arc, 0, 1)
-    return intensity
+    return float(intensity)
 
 
-def generate_full_composition(theme_path: Optional[str] = None, output_dir: Path = None):
+def generate_full_composition(theme_path: Optional[str] = None, output_dir: Optional[Path] = None):
     """
     Generate all 12 chapters with intensity curve
 
@@ -533,7 +531,7 @@ def generate_full_composition(theme_path: Optional[str] = None, output_dir: Path
     theme = ThemeLoader.load(Path(theme_path) if theme_path else None)
 
     print(f"\n{'='*60}")
-    print(f"YOURDIO - Retro Lo-Fi Algorithmic Composer")
+    print("YOURDIO - Retro Lo-Fi Algorithmic Composer")
     print(f"{'='*60}")
     print(f"Theme: {theme.get('name', 'Default')}")
     if "description" in theme:
@@ -594,7 +592,7 @@ def generate_full_composition(theme_path: Optional[str] = None, output_dir: Path
 
     print(f"\n{'='*60}")
     print(f"Generation complete! 12 chapters saved to: {output_dir}")
-    print(f"Total duration: 6 hours")
+    print("Total duration: 6 hours")
     print(f"{'='*60}\n")
 
 

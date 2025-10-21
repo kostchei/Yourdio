@@ -29,9 +29,8 @@ import threading
 import yaml
 from pathlib import Path
 from typing import Dict, Any
-import sys
 
-from yourdio import RetroMIDIComposer, generate_full_composition
+from yourdio import generate_full_composition
 from event_generator import EventSoundscapeGenerator
 from theme_loader import ThemeLoader
 
@@ -695,7 +694,7 @@ class YourdioGUI:
             intervals = [
                 int(x.strip()) for x in self.theme_widgets["harmony_intervals"].get().split(",")
             ]
-        except:
+        except Exception:
             intervals = [0, 3, 6]
 
         theme = {
@@ -933,7 +932,7 @@ class YourdioGUI:
 def main():
     """Launch the GUI"""
     root = tk.Tk()
-    app = YourdioGUI(root)
+    _app = YourdioGUI(root)  # noqa: F841
     root.mainloop()
 
 

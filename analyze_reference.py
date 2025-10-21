@@ -8,7 +8,7 @@ Install: pip install librosa numpy
 import librosa
 import numpy as np
 from pathlib import Path
-from typing import Dict, Tuple
+from typing import Dict
 import yaml
 
 
@@ -49,7 +49,7 @@ class ReferenceAnalyzer:
         energy = ReferenceAnalyzer._extract_energy(y, sr)
         complexity = ReferenceAnalyzer._extract_complexity(y, sr)
 
-        print(f"\nExtracted Features:")
+        print("\nExtracted Features:")
         print(f"  Tempo: {tempo_bpm:.1f} BPM")
         print(f"  Brightness: {brightness:.2f} (0=dark, 1=bright)")
         print(f"  Mode: {mode}")
@@ -58,7 +58,7 @@ class ReferenceAnalyzer:
 
         # Generate theme
         theme = ReferenceAnalyzer._features_to_theme(
-            tempo_bpm, brightness, mode, energy, complexity
+            tempo_bpm, brightness, mode, energy, complexity, audio_path
         )
 
         # Save if requested
@@ -94,7 +94,6 @@ class ReferenceAnalyzer:
 
         # Detect root note (most prominent pitch class)
         root_idx = np.argmax(chroma_mean)
-        root_names = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
 
         # Detect mode by analyzing interval patterns
         # (Simplified: check minor vs major third)
@@ -134,7 +133,7 @@ class ReferenceAnalyzer:
 
     @staticmethod
     def _features_to_theme(
-        tempo: float, brightness: float, mode: str, energy: float, complexity: float
+        tempo: float, brightness: float, mode: str, energy: float, complexity: float, audio_path: str
     ) -> Dict:
         """Convert extracted features to theme parameters"""
 

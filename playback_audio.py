@@ -7,7 +7,6 @@ Plays MIDI files using pygame.midi
 import pygame
 import pygame.midi
 import time
-import sys
 from pathlib import Path
 
 
@@ -68,7 +67,7 @@ def play_all_chapters(output_dir: str):
         return
 
     print(f"\n{'='*60}")
-    print(f"YOURDIO MIDI PLAYER")
+    print("YOURDIO MIDI PLAYER")
     print(f"{'='*60}")
     print(f"Found {len(midi_files)} chapters")
     print(f"Total duration: {len(midi_files) * 30} minutes ({len(midi_files) * 0.5:.1f} hours)")

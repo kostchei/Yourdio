@@ -4,7 +4,6 @@ Build script for creating Yourdio Windows executable
 """
 
 import PyInstaller.__main__
-import sys
 from pathlib import Path
 
 

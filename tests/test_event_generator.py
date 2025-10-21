@@ -4,7 +4,6 @@ Tests for event_generator.py
 Tests event soundscape generation functionality.
 """
 
-import pytest
 from event_generator import EventSoundscapeGenerator
 
 

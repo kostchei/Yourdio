@@ -127,7 +127,7 @@ class ThemeLoader:
         # Deep merge for nested dicts
         for key, value in theme.items():
             if isinstance(value, dict) and key in merged and isinstance(merged[key], dict):
-                merged[key] = {**merged[key], **value}
+                merged[key] = {**merged[key], **value}  # type: ignore[dict-item]
             else:
                 merged[key] = value
 
