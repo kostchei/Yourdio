@@ -7,6 +7,7 @@ import PyInstaller.__main__
 import sys
 from pathlib import Path
 
+
 def build_exe():
     """Build the Windows executable using PyInstaller"""
 
@@ -15,25 +16,23 @@ def build_exe():
 
     # PyInstaller arguments
     args = [
-        str(script_dir / 'yourdio_gui.py'),  # Main script
-        '--name=Yourdio',                     # Executable name
-        '--onefile',                          # Single file executable
-        '--windowed',                         # No console window
-        '--icon=NONE',                        # No icon (can add one later)
-        '--clean',                            # Clean cache
-        '--noconfirm',                        # Overwrite without asking
-
+        str(script_dir / "yourdio_gui.py"),  # Main script
+        "--name=Yourdio",  # Executable name
+        "--onefile",  # Single file executable
+        "--windowed",  # No console window
+        "--icon=NONE",  # No icon (can add one later)
+        "--clean",  # Clean cache
+        "--noconfirm",  # Overwrite without asking
         # Hidden imports that might not be detected automatically
-        '--hidden-import=yaml',
-        '--hidden-import=midiutil',
-        '--hidden-import=pygame',
-        '--hidden-import=numpy',
-        '--hidden-import=tkinter',
-        '--hidden-import=tkinter.ttk',
-        '--hidden-import=tkinter.filedialog',
-        '--hidden-import=tkinter.messagebox',
-        '--hidden-import=tkinter.scrolledtext',
-
+        "--hidden-import=yaml",
+        "--hidden-import=midiutil",
+        "--hidden-import=pygame",
+        "--hidden-import=numpy",
+        "--hidden-import=tkinter",
+        "--hidden-import=tkinter.ttk",
+        "--hidden-import=tkinter.filedialog",
+        "--hidden-import=tkinter.messagebox",
+        "--hidden-import=tkinter.scrolledtext",
         # Add application data
         f'--add-data={script_dir / "yourdio.py"};.',
         f'--add-data={script_dir / "theme_loader.py"};.',
@@ -42,9 +41,9 @@ def build_exe():
     ]
 
     # Add themes directory if it exists
-    themes_dir = script_dir / 'themes'
+    themes_dir = script_dir / "themes"
     if themes_dir.exists():
-        args.append(f'--add-data={themes_dir};themes')
+        args.append(f"--add-data={themes_dir};themes")
 
     print("Building Yourdio.exe...")
     print(f"Output will be in: {script_dir / 'dist'}")
@@ -52,10 +51,11 @@ def build_exe():
     # Run PyInstaller
     PyInstaller.__main__.run(args)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("Build complete!")
     print(f"Executable location: {script_dir / 'dist' / 'Yourdio.exe'}")
-    print("="*60)
+    print("=" * 60)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     build_exe()

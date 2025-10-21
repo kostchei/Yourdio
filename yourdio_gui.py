@@ -66,18 +66,22 @@ class RetroStyle:
         style = ttk.Style(root)
 
         # Configure notebook (tabs)
-        style.configure('Retro.TNotebook', background=cls.BG_DARK, borderwidth=0)
-        style.configure('Retro.TNotebook.Tab',
-                       background=cls.BG_LIGHT,
-                       foreground='#006400',  # Dark green
-                       padding=[20, 8],
-                       borderwidth=2,
-                       relief='raised',
-                       font=('Courier', 10, 'bold'))
-        style.map('Retro.TNotebook.Tab',
-                 background=[('selected', cls.BG_MEDIUM)],
-                 foreground=[('selected', '#006400')],
-                 relief=[('selected', 'sunken')])
+        style.configure("Retro.TNotebook", background=cls.BG_DARK, borderwidth=0)
+        style.configure(
+            "Retro.TNotebook.Tab",
+            background=cls.BG_LIGHT,
+            foreground="#006400",  # Dark green
+            padding=[20, 8],
+            borderwidth=2,
+            relief="raised",
+            font=("Courier", 10, "bold"),
+        )
+        style.map(
+            "Retro.TNotebook.Tab",
+            background=[("selected", cls.BG_MEDIUM)],
+            foreground=[("selected", "#006400")],
+            relief=[("selected", "sunken")],
+        )
 
 
 class YourdioGUI:
@@ -121,12 +125,12 @@ class YourdioGUI:
         title = tk.Label(
             header,
             text="╔═══════════════════════════════════════════════════╗\n"
-                 "║  Y O U R D I O  ░▒▓ Retro Lo-Fi Generator ▓▒░  ║\n"
-                 "╚═══════════════════════════════════════════════════╝",
+            "║  Y O U R D I O  ░▒▓ Retro Lo-Fi Generator ▓▒░  ║\n"
+            "╚═══════════════════════════════════════════════════╝",
             font=("Courier", 10, "bold"),
             fg=RetroStyle.ACCENT_GREEN,
             bg=RetroStyle.BG_DARK,
-            justify=tk.LEFT
+            justify=tk.LEFT,
         )
         title.pack(side=tk.LEFT, padx=10)
 
@@ -137,14 +141,14 @@ class YourdioGUI:
             font=("Courier", 8),
             fg=RetroStyle.TEXT_DIM,
             bg=RetroStyle.BG_DARK,
-            justify=tk.RIGHT
+            justify=tk.RIGHT,
         )
         version.pack(side=tk.RIGHT, padx=10)
 
     def build_tabs(self):
         """Build tabbed interface"""
         # Create notebook with retro style
-        self.notebook = ttk.Notebook(self.root, style='Retro.TNotebook')
+        self.notebook = ttk.Notebook(self.root, style="Retro.TNotebook")
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
 
         # Tab 1: Theme Generator (6-hour compositions)
@@ -176,8 +180,7 @@ class YourdioGUI:
         scrollable_frame = tk.Frame(canvas, bg=RetroStyle.BG_MEDIUM)
 
         scrollable_frame.bind(
-            "<Configure>",
-            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+            "<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
         )
 
         canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
@@ -191,48 +194,69 @@ class YourdioGUI:
 
         # Theme Name
         self.add_section(scrollable_frame, "═══ THEME INFO ═══")
-        self.theme_widgets['name'] = self.add_entry(scrollable_frame, "Theme Name", "My Theme")
-        self.theme_widgets['description'] = self.add_entry(scrollable_frame, "Description", "Custom theme")
+        self.theme_widgets["name"] = self.add_entry(scrollable_frame, "Theme Name", "My Theme")
+        self.theme_widgets["description"] = self.add_entry(
+            scrollable_frame, "Description", "Custom theme"
+        )
 
         # Tempo
         self.add_section(scrollable_frame, "═══ TEMPO ═══")
-        self.theme_widgets['tempo_base'] = self.add_slider(scrollable_frame, "Base BPM", 40, 120, 58)
-        self.theme_widgets['tempo_min'] = self.add_slider(scrollable_frame, "Min BPM", 40, 120, 52)
-        self.theme_widgets['tempo_max'] = self.add_slider(scrollable_frame, "Max BPM", 40, 120, 68)
+        self.theme_widgets["tempo_base"] = self.add_slider(
+            scrollable_frame, "Base BPM", 40, 120, 58
+        )
+        self.theme_widgets["tempo_min"] = self.add_slider(scrollable_frame, "Min BPM", 40, 120, 52)
+        self.theme_widgets["tempo_max"] = self.add_slider(scrollable_frame, "Max BPM", 40, 120, 68)
 
         # Modal Center
         self.add_section(scrollable_frame, "═══ SCALE / MODE ═══")
-        self.theme_widgets['modal_center'] = self.add_dropdown(
-            scrollable_frame, "Modal Center",
-            ['D_dorian', 'A_aeolian', 'E_phrygian'],
-            'D_dorian'
+        self.theme_widgets["modal_center"] = self.add_dropdown(
+            scrollable_frame, "Modal Center", ["D_dorian", "A_aeolian", "E_phrygian"], "D_dorian"
         )
 
         # Harmony
         self.add_section(scrollable_frame, "═══ HARMONY ═══")
-        self.theme_widgets['harmony_type'] = self.add_entry(scrollable_frame, "Harmony Type", "quartal")
-        self.theme_widgets['harmony_intervals'] = self.add_entry(scrollable_frame, "Intervals (e.g. 0,3,6)", "0,3,6")
+        self.theme_widgets["harmony_type"] = self.add_entry(
+            scrollable_frame, "Harmony Type", "quartal"
+        )
+        self.theme_widgets["harmony_intervals"] = self.add_entry(
+            scrollable_frame, "Intervals (e.g. 0,3,6)", "0,3,6"
+        )
 
         # Dynamics
         self.add_section(scrollable_frame, "═══ DYNAMICS ═══")
-        self.theme_widgets['harmonic_velocity'] = self.add_slider(scrollable_frame, "Harmonic Velocity", 20, 100, 45)
-        self.theme_widgets['melodic_velocity'] = self.add_slider(scrollable_frame, "Melodic Velocity", 20, 100, 55)
-        self.theme_widgets['drone_velocity'] = self.add_slider(scrollable_frame, "Drone Velocity", 20, 100, 50)
+        self.theme_widgets["harmonic_velocity"] = self.add_slider(
+            scrollable_frame, "Harmonic Velocity", 20, 100, 45
+        )
+        self.theme_widgets["melodic_velocity"] = self.add_slider(
+            scrollable_frame, "Melodic Velocity", 20, 100, 55
+        )
+        self.theme_widgets["drone_velocity"] = self.add_slider(
+            scrollable_frame, "Drone Velocity", 20, 100, 50
+        )
 
         # Chaos
         self.add_section(scrollable_frame, "═══ CHAOS PARAMETERS ═══")
-        self.theme_widgets['logistic_r'] = self.add_slider(scrollable_frame, "Logistic R", 2.5, 4.0, 3.86, resolution=0.01)
-        self.theme_widgets['lorenz_sigma'] = self.add_slider(scrollable_frame, "Lorenz Sigma", 5.0, 20.0, 10.0, resolution=0.1)
+        self.theme_widgets["logistic_r"] = self.add_slider(
+            scrollable_frame, "Logistic R", 2.5, 4.0, 3.86, resolution=0.01
+        )
+        self.theme_widgets["lorenz_sigma"] = self.add_slider(
+            scrollable_frame, "Lorenz Sigma", 5.0, 20.0, 10.0, resolution=0.1
+        )
 
         # Structural Arc
         self.add_section(scrollable_frame, "═══ STRUCTURAL ARC ═══")
-        self.theme_widgets['arc_type'] = self.add_dropdown(
-            scrollable_frame, "Arc Type",
-            ['parabolic', 'slow_burn', 'descending', 'flat'],
-            'parabolic'
+        self.theme_widgets["arc_type"] = self.add_dropdown(
+            scrollable_frame,
+            "Arc Type",
+            ["parabolic", "slow_burn", "descending", "flat"],
+            "parabolic",
         )
-        self.theme_widgets['arc_min_intensity'] = self.add_slider(scrollable_frame, "Min Intensity", 0.0, 1.0, 0.2, resolution=0.1)
-        self.theme_widgets['arc_max_intensity'] = self.add_slider(scrollable_frame, "Max Intensity", 0.0, 1.0, 0.8, resolution=0.1)
+        self.theme_widgets["arc_min_intensity"] = self.add_slider(
+            scrollable_frame, "Min Intensity", 0.0, 1.0, 0.2, resolution=0.1
+        )
+        self.theme_widgets["arc_max_intensity"] = self.add_slider(
+            scrollable_frame, "Max Intensity", 0.0, 1.0, 0.8, resolution=0.1
+        )
 
         # === RIGHT SIDE: CONTROLS ===
 
@@ -248,7 +272,7 @@ class YourdioGUI:
             activebackground=RetroStyle.BUTTON_ACTIVE,
             font=("Courier", 10),
             relief=tk.RAISED,
-            bd=2
+            bd=2,
         ).pack(fill=tk.X, pady=2)
 
         tk.Button(
@@ -260,7 +284,7 @@ class YourdioGUI:
             activebackground=RetroStyle.BUTTON_ACTIVE,
             font=("Courier", 10),
             relief=tk.RAISED,
-            bd=2
+            bd=2,
         ).pack(fill=tk.X, pady=2)
 
         tk.Button(
@@ -272,7 +296,7 @@ class YourdioGUI:
             activebackground=RetroStyle.BUTTON_ACTIVE,
             font=("Courier", 9),
             relief=tk.RAISED,
-            bd=2
+            bd=2,
         ).pack(fill=tk.X, pady=2)
 
         # Generation
@@ -283,7 +307,7 @@ class YourdioGUI:
             text="Output Directory:",
             font=("Courier", 9),
             fg=RetroStyle.TEXT_NORMAL,
-            bg=RetroStyle.BG_LIGHT
+            bg=RetroStyle.BG_LIGHT,
         ).pack(anchor=tk.W)
 
         output_frame = tk.Frame(gen_frame, bg=RetroStyle.BG_LIGHT)
@@ -298,7 +322,7 @@ class YourdioGUI:
             fg=RetroStyle.LCD_TEXT,
             insertbackground=RetroStyle.LCD_TEXT,
             relief=tk.SUNKEN,
-            bd=2
+            bd=2,
         ).pack(side=tk.LEFT, fill=tk.X, expand=True)
 
         tk.Button(
@@ -308,7 +332,7 @@ class YourdioGUI:
             bg=RetroStyle.BUTTON_BG,
             fg=RetroStyle.TEXT_BRIGHT,
             font=("Courier", 8),
-            width=3
+            width=3,
         ).pack(side=tk.RIGHT, padx=(5, 0))
 
         tk.Button(
@@ -321,7 +345,7 @@ class YourdioGUI:
             font=("Courier", 10, "bold"),
             relief=tk.RAISED,
             bd=3,
-            height=2
+            height=2,
         ).pack(fill=tk.X, pady=10)
 
         # Progress info
@@ -333,7 +357,7 @@ class YourdioGUI:
             font=("Courier", 9),
             fg=RetroStyle.TEXT_DIM,
             bg=RetroStyle.BG_LIGHT,
-            justify=tk.LEFT
+            justify=tk.LEFT,
         )
         self.theme_info_label.pack(fill=tk.BOTH, expand=True)
 
@@ -373,7 +397,7 @@ class YourdioGUI:
                 bg=RetroStyle.BG_LIGHT,
                 selectcolor=RetroStyle.BG_DARK,
                 activebackground=RetroStyle.BG_LIGHT,
-                activeforeground=RetroStyle.ACCENT_GREEN
+                activeforeground=RetroStyle.ACCENT_GREEN,
             )
             cb.pack(anchor=tk.W, padx=5, pady=2)
 
@@ -382,7 +406,7 @@ class YourdioGUI:
                 text=f"  {config['description']} ({config['duration_minutes']} min)",
                 font=("Courier", 8),
                 fg=RetroStyle.TEXT_DIM,
-                bg=RetroStyle.BG_LIGHT
+                bg=RetroStyle.BG_LIGHT,
             )
             desc.pack(anchor=tk.W, padx=20, pady=(0, 5))
 
@@ -397,7 +421,7 @@ class YourdioGUI:
             bg=RetroStyle.BUTTON_BG,
             fg=RetroStyle.TEXT_BRIGHT,
             font=("Courier", 9),
-            width=15
+            width=15,
         ).pack(side=tk.LEFT, padx=5)
 
         tk.Button(
@@ -407,7 +431,7 @@ class YourdioGUI:
             bg=RetroStyle.BUTTON_BG,
             fg=RetroStyle.TEXT_BRIGHT,
             font=("Courier", 9),
-            width=15
+            width=15,
         ).pack(side=tk.LEFT, padx=5)
 
         # === RIGHT SIDE: CONTROLS ===
@@ -421,7 +445,7 @@ class YourdioGUI:
             font=("Courier", 9),
             fg=RetroStyle.TEXT_DIM,
             bg=RetroStyle.BG_LIGHT,
-            justify=tk.CENTER
+            justify=tk.CENTER,
         ).pack(pady=10)
 
         tk.Button(
@@ -432,7 +456,7 @@ class YourdioGUI:
             fg=RetroStyle.TEXT_BRIGHT,
             font=("Courier", 9),
             relief=tk.RAISED,
-            bd=2
+            bd=2,
         ).pack(fill=tk.X, pady=5)
 
         # Output
@@ -443,7 +467,7 @@ class YourdioGUI:
             text="Output Directory:",
             font=("Courier", 9),
             fg=RetroStyle.TEXT_NORMAL,
-            bg=RetroStyle.BG_LIGHT
+            bg=RetroStyle.BG_LIGHT,
         ).pack(anchor=tk.W)
 
         output_dir_frame = tk.Frame(output_frame, bg=RetroStyle.BG_LIGHT)
@@ -458,7 +482,7 @@ class YourdioGUI:
             fg=RetroStyle.LCD_TEXT,
             insertbackground=RetroStyle.LCD_TEXT,
             relief=tk.SUNKEN,
-            bd=2
+            bd=2,
         ).pack(side=tk.LEFT, fill=tk.X, expand=True)
 
         tk.Button(
@@ -468,7 +492,7 @@ class YourdioGUI:
             bg=RetroStyle.BUTTON_BG,
             fg=RetroStyle.TEXT_BRIGHT,
             font=("Courier", 8),
-            width=3
+            width=3,
         ).pack(side=tk.RIGHT, padx=(5, 0))
 
         # Generate button
@@ -482,7 +506,7 @@ class YourdioGUI:
             font=("Courier", 10, "bold"),
             relief=tk.RAISED,
             bd=3,
-            height=2
+            height=2,
         ).pack(fill=tk.X, pady=10)
 
         # Info
@@ -494,7 +518,7 @@ class YourdioGUI:
             font=("Courier", 9),
             fg=RetroStyle.TEXT_DIM,
             bg=RetroStyle.BG_LIGHT,
-            justify=tk.LEFT
+            justify=tk.LEFT,
         )
         self.event_info_label.pack(fill=tk.BOTH, expand=True)
 
@@ -510,7 +534,7 @@ class YourdioGUI:
             text="═══ STATUS ═══",
             font=("Courier", 9, "bold"),
             fg=RetroStyle.ACCENT_GREEN,
-            bg=RetroStyle.BG_DARK
+            bg=RetroStyle.BG_DARK,
         )
         status_label.pack(anchor=tk.W, pady=(5, 2))
 
@@ -523,7 +547,7 @@ class YourdioGUI:
             fg=RetroStyle.LCD_TEXT,
             insertbackground=RetroStyle.LCD_TEXT,
             relief=tk.SUNKEN,
-            bd=2
+            bd=2,
         )
         self.status_text.pack(fill=tk.BOTH, expand=True)
 
@@ -541,7 +565,7 @@ class YourdioGUI:
             text=f"═══ {title} ═══",
             font=("Courier", 9, "bold"),
             fg=RetroStyle.ACCENT_CYAN,
-            bg=RetroStyle.BG_MEDIUM
+            bg=RetroStyle.BG_MEDIUM,
         ).pack(pady=(0, 5))
 
         panel = tk.Frame(container, bg=RetroStyle.BG_LIGHT, relief=tk.SUNKEN, bd=2)
@@ -556,7 +580,7 @@ class YourdioGUI:
             text=title,
             font=("Courier", 10, "bold"),
             fg=RetroStyle.ACCENT_GREEN,
-            bg=RetroStyle.BG_MEDIUM
+            bg=RetroStyle.BG_MEDIUM,
         ).pack(pady=(15, 5), anchor=tk.W)
 
     def add_entry(self, parent, label, default=""):
@@ -571,7 +595,7 @@ class YourdioGUI:
             fg=RetroStyle.TEXT_NORMAL,
             bg=RetroStyle.BG_LIGHT,
             width=25,
-            anchor=tk.W
+            anchor=tk.W,
         ).pack(side=tk.LEFT, padx=5)
 
         var = tk.StringVar(value=default)
@@ -581,7 +605,7 @@ class YourdioGUI:
             font=("Courier", 9),
             bg=RetroStyle.LCD_BG,
             fg=RetroStyle.LCD_TEXT,
-            insertbackground=RetroStyle.LCD_TEXT
+            insertbackground=RetroStyle.LCD_TEXT,
         )
         entry.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
 
@@ -601,7 +625,7 @@ class YourdioGUI:
             font=("Courier", 9),
             fg=RetroStyle.TEXT_NORMAL,
             bg=RetroStyle.BG_LIGHT,
-            anchor=tk.W
+            anchor=tk.W,
         ).pack(side=tk.LEFT, padx=5)
 
         value_var = tk.DoubleVar(value=default)
@@ -612,7 +636,7 @@ class YourdioGUI:
             fg=RetroStyle.ACCENT_CYAN,
             bg=RetroStyle.BG_LIGHT,
             width=8,
-            anchor=tk.E
+            anchor=tk.E,
         )
         value_label.pack(side=tk.RIGHT, padx=5)
 
@@ -628,7 +652,7 @@ class YourdioGUI:
             fg=RetroStyle.TEXT_BRIGHT,
             troughcolor=RetroStyle.LCD_BG,
             activebackground=RetroStyle.ACCENT_GREEN,
-            highlightthickness=0
+            highlightthickness=0,
         )
         slider.pack(fill=tk.X, padx=5)
 
@@ -646,16 +670,12 @@ class YourdioGUI:
             fg=RetroStyle.TEXT_NORMAL,
             bg=RetroStyle.BG_LIGHT,
             width=25,
-            anchor=tk.W
+            anchor=tk.W,
         ).pack(side=tk.LEFT, padx=5)
 
         var = tk.StringVar(value=default)
         dropdown = ttk.Combobox(
-            frame,
-            textvariable=var,
-            values=options,
-            font=("Courier", 9),
-            state='readonly'
+            frame, textvariable=var, values=options, font=("Courier", 9), state="readonly"
         )
         dropdown.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5)
 
@@ -672,43 +692,51 @@ class YourdioGUI:
     def get_theme_from_widgets(self) -> Dict[str, Any]:
         """Build theme dict from widget values"""
         try:
-            intervals = [int(x.strip()) for x in self.theme_widgets['harmony_intervals'].get().split(',')]
+            intervals = [
+                int(x.strip()) for x in self.theme_widgets["harmony_intervals"].get().split(",")
+            ]
         except:
             intervals = [0, 3, 6]
 
         theme = {
-            'name': self.theme_widgets['name'].get(),
-            'description': self.theme_widgets['description'].get(),
-            'modal_center': self.theme_widgets['modal_center'].get(),
-            'harmony_rules': {
-                'type': self.theme_widgets['harmony_type'].get(),
-                'intervals': intervals
+            "name": self.theme_widgets["name"].get(),
+            "description": self.theme_widgets["description"].get(),
+            "modal_center": self.theme_widgets["modal_center"].get(),
+            "harmony_rules": {
+                "type": self.theme_widgets["harmony_type"].get(),
+                "intervals": intervals,
             },
-            'tempo': {
-                'base': int(self.theme_widgets['tempo_base'].get()),
-                'variation_range': [
-                    int(self.theme_widgets['tempo_min'].get()),
-                    int(self.theme_widgets['tempo_max'].get())
-                ]
+            "tempo": {
+                "base": int(self.theme_widgets["tempo_base"].get()),
+                "variation_range": [
+                    int(self.theme_widgets["tempo_min"].get()),
+                    int(self.theme_widgets["tempo_max"].get()),
+                ],
             },
-            'dynamics': {
-                'harmonic_bed': {'base_velocity': int(self.theme_widgets['harmonic_velocity'].get()), 'prime_mod_range': 20},
-                'melodic_texture': {'base_velocity': int(self.theme_widgets['melodic_velocity'].get()), 'prime_mod_range': 25},
-                'drones': {'velocity': int(self.theme_widgets['drone_velocity'].get())},
-                'ambient_events': {'base_velocity': 60, 'intensity_scaling': 30}
+            "dynamics": {
+                "harmonic_bed": {
+                    "base_velocity": int(self.theme_widgets["harmonic_velocity"].get()),
+                    "prime_mod_range": 20,
+                },
+                "melodic_texture": {
+                    "base_velocity": int(self.theme_widgets["melodic_velocity"].get()),
+                    "prime_mod_range": 25,
+                },
+                "drones": {"velocity": int(self.theme_widgets["drone_velocity"].get())},
+                "ambient_events": {"base_velocity": 60, "intensity_scaling": 30},
             },
-            'chaos': {
-                'logistic_r': float(self.theme_widgets['logistic_r'].get()),
-                'lorenz_sigma': float(self.theme_widgets['lorenz_sigma'].get()),
-                'lorenz_rho': 28.0,
-                'lorenz_beta': 8.0/3.0
+            "chaos": {
+                "logistic_r": float(self.theme_widgets["logistic_r"].get()),
+                "lorenz_sigma": float(self.theme_widgets["lorenz_sigma"].get()),
+                "lorenz_rho": 28.0,
+                "lorenz_beta": 8.0 / 3.0,
             },
-            'structural_arc': {
-                'type': self.theme_widgets['arc_type'].get(),
-                'min_intensity': float(self.theme_widgets['arc_min_intensity'].get()),
-                'max_intensity': float(self.theme_widgets['arc_max_intensity'].get()),
-                'climax_chapter': 6
-            }
+            "structural_arc": {
+                "type": self.theme_widgets["arc_type"].get(),
+                "min_intensity": float(self.theme_widgets["arc_min_intensity"].get()),
+                "max_intensity": float(self.theme_widgets["arc_max_intensity"].get()),
+                "climax_chapter": 6,
+            },
         }
 
         # Merge with default for missing fields
@@ -716,43 +744,47 @@ class YourdioGUI:
 
     def set_widgets_from_theme(self, theme: Dict[str, Any]):
         """Update widgets from theme dict"""
-        self.theme_widgets['name'].set(theme.get('name', 'Theme'))
-        self.theme_widgets['description'].set(theme.get('description', ''))
+        self.theme_widgets["name"].set(theme.get("name", "Theme"))
+        self.theme_widgets["description"].set(theme.get("description", ""))
 
-        tempo = theme.get('tempo', {})
+        tempo = theme.get("tempo", {})
         if isinstance(tempo, dict):
-            self.theme_widgets['tempo_base'].set(tempo.get('base', 58))
-            var_range = tempo.get('variation_range', [52, 68])
-            self.theme_widgets['tempo_min'].set(var_range[0])
-            self.theme_widgets['tempo_max'].set(var_range[1])
+            self.theme_widgets["tempo_base"].set(tempo.get("base", 58))
+            var_range = tempo.get("variation_range", [52, 68])
+            self.theme_widgets["tempo_min"].set(var_range[0])
+            self.theme_widgets["tempo_max"].set(var_range[1])
 
-        self.theme_widgets['modal_center'].set(theme.get('modal_center', 'D_dorian'))
+        self.theme_widgets["modal_center"].set(theme.get("modal_center", "D_dorian"))
 
-        harmony = theme.get('harmony_rules', {})
-        self.theme_widgets['harmony_type'].set(harmony.get('type', 'quartal'))
-        intervals = harmony.get('intervals', [0, 3, 6])
-        self.theme_widgets['harmony_intervals'].set(','.join(map(str, intervals)))
+        harmony = theme.get("harmony_rules", {})
+        self.theme_widgets["harmony_type"].set(harmony.get("type", "quartal"))
+        intervals = harmony.get("intervals", [0, 3, 6])
+        self.theme_widgets["harmony_intervals"].set(",".join(map(str, intervals)))
 
-        dynamics = theme.get('dynamics', {})
-        self.theme_widgets['harmonic_velocity'].set(dynamics.get('harmonic_bed', {}).get('base_velocity', 45))
-        self.theme_widgets['melodic_velocity'].set(dynamics.get('melodic_texture', {}).get('base_velocity', 55))
-        self.theme_widgets['drone_velocity'].set(dynamics.get('drones', {}).get('velocity', 50))
+        dynamics = theme.get("dynamics", {})
+        self.theme_widgets["harmonic_velocity"].set(
+            dynamics.get("harmonic_bed", {}).get("base_velocity", 45)
+        )
+        self.theme_widgets["melodic_velocity"].set(
+            dynamics.get("melodic_texture", {}).get("base_velocity", 55)
+        )
+        self.theme_widgets["drone_velocity"].set(dynamics.get("drones", {}).get("velocity", 50))
 
-        chaos = theme.get('chaos', {})
-        self.theme_widgets['logistic_r'].set(chaos.get('logistic_r', 3.86))
-        self.theme_widgets['lorenz_sigma'].set(chaos.get('lorenz_sigma', 10.0))
+        chaos = theme.get("chaos", {})
+        self.theme_widgets["logistic_r"].set(chaos.get("logistic_r", 3.86))
+        self.theme_widgets["lorenz_sigma"].set(chaos.get("lorenz_sigma", 10.0))
 
-        arc = theme.get('structural_arc', {})
-        self.theme_widgets['arc_type'].set(arc.get('type', 'parabolic'))
-        self.theme_widgets['arc_min_intensity'].set(arc.get('min_intensity', 0.2))
-        self.theme_widgets['arc_max_intensity'].set(arc.get('max_intensity', 0.8))
+        arc = theme.get("structural_arc", {})
+        self.theme_widgets["arc_type"].set(arc.get("type", "parabolic"))
+        self.theme_widgets["arc_min_intensity"].set(arc.get("min_intensity", 0.2))
+        self.theme_widgets["arc_max_intensity"].set(arc.get("max_intensity", 0.8))
 
     def load_theme_yaml(self):
         """Load theme from YAML file"""
         filename = filedialog.askopenfilename(
             title="Load Theme YAML",
             filetypes=[("YAML files", "*.yaml *.yml"), ("All files", "*.*")],
-            initialdir="."
+            initialdir=".",
         )
 
         if filename:
@@ -773,13 +805,13 @@ class YourdioGUI:
             defaultextension=".yaml",
             filetypes=[("YAML files", "*.yaml"), ("All files", "*.*")],
             initialdir=".",
-            initialfile=self.theme_widgets['name'].get().lower().replace(' ', '_') + ".yaml"
+            initialfile=self.theme_widgets["name"].get().lower().replace(" ", "_") + ".yaml",
         )
 
         if filename:
             try:
                 theme = self.get_theme_from_widgets()
-                with open(filename, 'w') as f:
+                with open(filename, "w") as f:
                     yaml.dump(theme, f, default_flow_style=False, sort_keys=False)
                 self.log(f"Saved theme to: {filename}")
                 messagebox.showinfo("Success", f"Theme saved to:\n{filename}")
@@ -813,7 +845,7 @@ class YourdioGUI:
 
         # Save theme temporarily
         temp_theme_path = Path("temp_theme.yaml")
-        with open(temp_theme_path, 'w') as f:
+        with open(temp_theme_path, "w") as f:
             yaml.dump(theme, f)
 
         self.log(f"Starting generation: {theme['name']}")
@@ -823,8 +855,7 @@ class YourdioGUI:
         def generate():
             try:
                 generate_full_composition(
-                    theme_path=str(temp_theme_path),
-                    output_dir=Path(output_dir)
+                    theme_path=str(temp_theme_path), output_dir=Path(output_dir)
                 )
                 self.log("✓ Generation complete!")
                 temp_theme_path.unlink()  # Clean up
@@ -873,7 +904,7 @@ class YourdioGUI:
 
         # Save theme temporarily
         temp_theme_path = Path("temp_event_theme.yaml")
-        with open(temp_theme_path, 'w') as f:
+        with open(temp_theme_path, "w") as f:
             yaml.dump(theme, f)
 
         self.log(f"Generating {len(selected_events)} events...")
@@ -884,11 +915,13 @@ class YourdioGUI:
                 files = EventSoundscapeGenerator.generate_event_set(
                     theme_path=str(temp_theme_path),
                     events=selected_events,
-                    output_dir=Path(output_dir)
+                    output_dir=Path(output_dir),
                 )
                 self.log(f"✓ Generated {len(files)} event soundscapes!")
                 temp_theme_path.unlink()  # Clean up
-                messagebox.showinfo("Success", f"Generated {len(files)} events!\nSaved to: {output_dir}")
+                messagebox.showinfo(
+                    "Success", f"Generated {len(files)} events!\nSaved to: {output_dir}"
+                )
             except Exception as e:
                 self.log(f"ERROR: {e}")
                 messagebox.showerror("Error", f"Generation failed:\n{e}")
@@ -904,5 +937,5 @@ def main():
     root.mainloop()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

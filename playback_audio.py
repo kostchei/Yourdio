@@ -61,7 +61,7 @@ def play_all_chapters(output_dir: str):
         return
 
     # Get all MIDI files sorted by name
-    midi_files = sorted(output_dir.glob('chapter_*.mid'))
+    midi_files = sorted(output_dir.glob("chapter_*.mid"))
 
     if not midi_files:
         print(f"No chapter MIDI files found in: {output_dir}")
@@ -102,14 +102,18 @@ def play_all_chapters(output_dir: str):
         print(f"{'='*60}\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description='Play Yourdio MIDI files')
-    parser.add_argument('--file', type=str, help='Play a single MIDI file')
-    parser.add_argument('--dir', type=str, default='conan_output',
-                       help='Play all chapters from directory (default: conan_output)')
-    parser.add_argument('--chapter', type=int, help='Play specific chapter number (0-11)')
+    parser = argparse.ArgumentParser(description="Play Yourdio MIDI files")
+    parser.add_argument("--file", type=str, help="Play a single MIDI file")
+    parser.add_argument(
+        "--dir",
+        type=str,
+        default="conan_output",
+        help="Play all chapters from directory (default: conan_output)",
+    )
+    parser.add_argument("--chapter", type=int, help="Play specific chapter number (0-11)")
 
     args = parser.parse_args()
 
@@ -118,7 +122,7 @@ if __name__ == '__main__':
         play_midi(args.file)
     elif args.chapter is not None:
         # Play specific chapter
-        chapter_file = Path(args.dir) / f'chapter_{args.chapter:02d}.mid'
+        chapter_file = Path(args.dir) / f"chapter_{args.chapter:02d}.mid"
         play_midi(str(chapter_file))
     else:
         # Play all chapters
