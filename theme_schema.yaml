@@ -1,0 +1,115 @@
+# ============================================================================
+# YOURDIO THEME SCHEMA
+# ============================================================================
+# This file documents all available parameters for controlling musical style
+# Copy this template to create your own themes (e.g., themes/my_style.yaml)
+# ============================================================================
+
+name: "Example Theme"
+description: "Template showing all available parameters"
+
+# === MODAL CENTER ===
+# Defines the scale/mode for the entire composition
+modal_center: 'D_dorian'
+# Options: 'D_dorian' | 'A_aeolian' | 'E_phrygian'
+# Or define custom scale (MIDI note numbers):
+# custom_scale: [62, 64, 65, 67, 69, 71, 72, 74]
+
+# === HARMONY RULES ===
+# Controls chord construction and voicing
+harmony_rules:
+  type: 'quartal'               # Name for reference
+  intervals: [0, 3, 6]          # Scale degrees (0=root, 3=4th, 6=7th in dorian)
+
+  # Optional: Define variation that triggers on prime condition
+  variation: 'tertian'
+  variation_intervals: [0, 2, 5]  # Tertian triads
+  variation_chance_mod: 3       # Triggers when (prime % 3 == 0)
+
+# === RHYTHMIC LANGUAGE ===
+# Defines timing behavior for each compositional layer
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 32           # Beats per chord
+    prime_mod_factor: 8         # chord_length = base + (prime % factor)
+
+  melodic_texture:
+    type: 'fibonacci'           # Uses Fibonacci sequence for durations
+    sequence_length: 8          # Number of Fibonacci values to use
+    base_unit: 0.25             # Scaling factor (0.25 = quarter-note scale)
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 4      # drone_length = prime * multiplier
+    cc_event_interval: 4        # MIDI CC events every N beats
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.87             # Chaos threshold (0.0-1.0, higher = fewer events)
+    event_count: 64             # Number of potential events per chapter
+
+# === ENSEMBLE (INSTRUMENTATION) ===
+# GM patch numbers for each compositional layer
+ensemble_gm:
+  harmonic_bed: 89      # Pad 2 (warm)
+  melodic_texture: 92   # Pad 5 (bowed)
+  drones: 95            # Pad 8 (sweep)
+  ambient_events: 99    # FX 4 (atmosphere)
+
+# For OPL3 rendering, specify OPL bank:
+# ensemble_opl3:
+#   bank: 73  # Doom instrument set
+
+# === TEMPO ===
+tempo:
+  base: 58                      # Base BPM
+  variation_range: [52, 68]     # Min/max for intensity modulation
+
+# === DYNAMICS ===
+# MIDI velocity ranges for expression
+dynamics:
+  harmonic_bed:
+    base_velocity: 45
+    prime_mod_range: 20         # velocity = base + (prime % range)
+
+  melodic_texture:
+    base_velocity: 55
+    prime_mod_range: 25
+
+  drones:
+    velocity: 50                # Fixed velocity
+
+  ambient_events:
+    base_velocity: 60
+    intensity_scaling: 30       # Adds intensity * scaling to velocity
+
+# === STRUCTURAL ARC ===
+# Defines the 6-hour dramatic journey
+structural_arc:
+  type: 'parabolic'             # parabolic | slow_burn | descending | flat
+  min_intensity: 0.2
+  max_intensity: 0.8
+  climax_chapter: 6             # Which chapter (0-11) is the peak
+
+# === PARAMETER EVOLUTION ===
+# Which parameters change with intensity across the arc
+parameter_evolution:
+  tempo: true                   # Tempo increases with intensity
+  polyphony: true               # Voice count increases with intensity
+  velocity: true                # Dynamics increase with intensity
+  register: true                # Melodic register rises with intensity
+
+# === CHAOS & MODULATION ===
+chaos:
+  logistic_r: 3.86              # Logistic map growth rate
+  lorenz_sigma: 10.0            # Lorenz attractor parameters
+  lorenz_rho: 28.0
+  lorenz_beta: 2.666
+
+# === MOTIF PLACEMENT ===
+motif:
+  core_pattern: [0, 2, 5, 7]    # Scale degrees
+  interval_minutes: 17          # Time between motif appearances
+  register_shift_prime_mod: 2   # Octave shift when (prime % mod == 0)
+  ornament_density_mod: 5       # ornament_density = (prime % mod) / mod

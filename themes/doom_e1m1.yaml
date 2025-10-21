@@ -1,0 +1,85 @@
+# ============================================================================
+# DOOM E1M1 STYLE
+# ============================================================================
+# Inspired by Doom (1993) - aggressive, dark, industrial
+# ============================================================================
+
+name: "Doom E1M1"
+description: "Dark industrial ambient with metallic textures"
+
+modal_center: 'E_phrygian'  # Dark, exotic, menacing
+
+harmony_rules:
+  type: 'dissonant_clusters'
+  intervals: [0, 1, 3]      # Minor 2nds and 3rds - tense, grinding
+  variation: 'power_chords'
+  variation_intervals: [0, 7]  # Perfect 5th - heavy, powerful
+  variation_chance_mod: 2   # Frequent variation
+
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 24       # Faster chord changes
+    prime_mod_factor: 6
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 8
+    base_unit: 0.2          # Shorter, more aggressive notes
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 3  # Shorter, more active drones
+    cc_event_interval: 3
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.82         # More frequent aggressive events
+    event_count: 80
+
+ensemble_gm:
+  harmonic_bed: 93      # Pad 6 (metallic) - industrial
+  melodic_texture: 81   # Lead 2 (sawtooth) - aggressive
+  drones: 39            # Synth Bass 2 - heavy low end
+  ambient_events: 101   # FX 6 (goblins) - disturbing textures
+
+tempo:
+  base: 64
+  variation_range: [58, 72]
+
+dynamics:
+  harmonic_bed:
+    base_velocity: 55
+    prime_mod_range: 25
+  melodic_texture:
+    base_velocity: 65
+    prime_mod_range: 30
+  drones:
+    velocity: 60
+  ambient_events:
+    base_velocity: 70
+    intensity_scaling: 35
+
+structural_arc:
+  type: 'slow_burn'       # Ascending intensity
+  min_intensity: 0.3      # Start medium
+  max_intensity: 0.9      # Build to high intensity
+  climax_chapter: 11      # Peak at the end
+
+parameter_evolution:
+  tempo: true
+  polyphony: true
+  velocity: true
+  register: true          # Rising tension
+
+chaos:
+  logistic_r: 3.90        # Higher chaos = more unpredictable
+  lorenz_sigma: 12.0
+  lorenz_rho: 30.0
+  lorenz_beta: 2.5
+
+motif:
+  core_pattern: [0, 1, 4, 6]  # Phrygian chromatic motif
+  interval_minutes: 12        # More frequent motif
+  register_shift_prime_mod: 2
+  ornament_density_mod: 3     # Dense ornamentation
