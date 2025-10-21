@@ -50,12 +50,15 @@ class RetroStyle:
         style.configure('Retro.TNotebook', background=cls.BG_DARK, borderwidth=0)
         style.configure('Retro.TNotebook.Tab',
                        background=cls.BG_LIGHT,
-                       foreground=cls.TEXT_NORMAL,
+                       foreground='#006400',  # Dark green
                        padding=[20, 8],
-                       borderwidth=1)
+                       borderwidth=2,
+                       relief='raised',
+                       font=('Courier', 10, 'bold'))
         style.map('Retro.TNotebook.Tab',
                  background=[('selected', cls.BG_MEDIUM)],
-                 foreground=[('selected', cls.TEXT_BRIGHT)])
+                 foreground=[('selected', '#006400')],
+                 relief=[('selected', 'sunken')])
 
 
 class YourdioGUI:
