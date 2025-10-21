@@ -1,0 +1,63 @@
+name: "Dark Sun: Wasteland"
+description: "Post-apocalyptic desert fantasy - oppressive, sparse, dying world"
+modal_center: "E_phrygian"  # Exotic, Middle Eastern, ominous
+
+harmony_rules:
+  type: "dissonant_clusters"  # Harsh, unstable world
+  intervals: [0, 1, 6]  # Dissonant, unsettling
+  variation: "quartal"
+  variation_intervals: [0, 3, 6]
+  variation_chance_mod: 7  # Occasional relief
+
+rhythmic_language:
+  harmonic_bed:
+    type: "prime_modulated"
+    base_duration: 64  # Very slow, exhausted
+    prime_mod_factor: 11
+  melodic_texture:
+    type: "fibonacci_gated"
+    base_duration: 32
+    fib_mod_factor: 13
+  drones:
+    enabled: true
+    duration: 128  # Long, oppressive drones
+  ambient_events:
+    enabled: true
+    sparsity: 0.3  # Sparse, desolate
+
+tempo:
+  base: 48  # Slow, oppressive heat
+  variation_range: [44, 52]
+
+dynamics:
+  harmonic_bed:
+    base_velocity: 35  # Very quiet, dying
+    prime_mod_range: 15
+  melodic_texture:
+    base_velocity: 42  # Slightly more present
+    prime_mod_range: 18
+  drones:
+    velocity: 30  # Barely audible background
+  ambient_events:
+    base_velocity: 45
+    intensity_scaling: 20  # Occasional harsh events
+
+ensemble_gm:
+  harmonic_bed: 89     # Pad 2 (warm) - desert heat shimmer
+  melodic_texture: 97  # Rain - distant, sparse droplets of hope
+  drones: 95           # Halo pad - dying sun
+  ambient_events: 122  # Seashore - wind, sand
+
+chaos:
+  logistic_r: 3.92  # High chaos - unpredictable wasteland
+  lorenz_sigma: 14.0
+  lorenz_rho: 30.0
+  lorenz_beta: 2.8
+
+structural_arc:
+  type: "descending"  # Dying world, fading hope
+  min_intensity: 0.15  # Very low start
+  max_intensity: 0.55  # Never reaches high intensity
+  climax_chapter: 3  # Early peak, then decline
+
+timbre_aesthetic: "dark"
