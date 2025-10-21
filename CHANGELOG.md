@@ -5,6 +5,28 @@ All notable changes to Yourdio will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2024-10-22
+
+### Added
+- Dark Sun: Wasteland theme for post-apocalyptic desert fantasy
+- New theme featuring E Phrygian mode with dissonant clusters
+- Descending structural arc (world fading/dying)
+- Very sparse, low-intensity atmosphere (perfect for Dark Sun RPG)
+
+### Fixed
+- All flake8 linting errors (17 issues) across codebase
+- All mypy type checking errors (7 issues)
+- Critical bug: undefined 'audio_path' in analyze_reference.py
+- Removed 8 unused imports across multiple files
+- Fixed 7 f-strings without placeholders
+- Fixed bare except clause in yourdio_gui.py
+- Added proper type annotations throughout
+
+### Changed
+- Applied Black code formatting to entire codebase
+- Improved type safety with explicit Optional types
+- Enhanced code quality to pass all static analysis checks
+
 ## [1.0.1] - 2024-10-22
 
 ### Added
