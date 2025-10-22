@@ -133,7 +133,12 @@ class ReferenceAnalyzer:
 
     @staticmethod
     def _features_to_theme(
-        tempo: float, brightness: float, mode: str, energy: float, complexity: float, audio_path: str
+        tempo: float,
+        brightness: float,
+        mode: str,
+        energy: float,
+        complexity: float,
+        audio_path: str,
     ) -> Dict:
         """Convert extracted features to theme parameters"""
 
