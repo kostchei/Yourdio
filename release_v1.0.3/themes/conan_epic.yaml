@@ -1,0 +1,92 @@
+name: "Conan the Barbarian Epic"
+description: "Inspired by Basil Poledouris's iconic Conan score - powerful, heroic, and sweeping orchestral grandeur"
+
+# Epic, powerful, heroic modal center
+modal_center: 'D_dorian'  # Bright minor - heroic yet somber
+
+# Powerful triadic harmony with occasional open fourths for heroic fanfares
+harmony_rules:
+  type: 'tertian'  # Major/minor triads for epic orchestral sound
+  intervals: [0, 2, 4]  # Root, third, fifth
+  variation: 'power_chords'
+  variation_intervals: [0, 4]  # Root and fifth only for powerful moments
+  variation_mod: 7  # Use power chords on prime 7 multiples
+
+# Rhythmic language - driving, martial, relentless
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 16  # Shorter for more driving rhythm
+    prime_mod_factor: 4  # Faster changes
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 8
+    base_unit: 0.5  # Longer notes for sweeping melodies
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 8  # Long sustained bass notes
+    cc_event_interval: 8
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.85  # More frequent dramatic punctuations
+    event_count: 96  # More events for orchestral texture
+
+# Orchestral ensemble - powerful brass, strings, and percussion
+ensemble_gm:
+  harmonic_bed: 48      # String Ensemble 1 - rich strings
+  melodic_texture: 56   # Trumpet - heroic brass melodies
+  drones: 42            # Cello - deep bass foundation
+  ambient_events: 47    # Timpani - orchestral percussion hits
+
+# Powerful, commanding tempo
+tempo:
+  base: 72  # Moderate, martial pace
+  variation_range: [68, 80]  # Some variation for drama
+
+# Strong, bold dynamics
+dynamics:
+  harmonic_bed:
+    base_velocity: 70  # Stronger than default
+    prime_mod_range: 30  # Wide dynamic range
+
+  melodic_texture:
+    base_velocity: 85  # Bold, heroic brass
+    prime_mod_range: 25
+
+  drones:
+    velocity: 65  # Solid bass foundation
+
+  ambient_events:
+    base_velocity: 90  # Powerful timpani hits
+    intensity_scaling: 35  # Wide dramatic range
+
+# Epic ascending arc - building to climax
+structural_arc:
+  type: 'slow_burn'  # Builds continuously like epic film score
+  min_intensity: 0.4  # Start strong
+  max_intensity: 0.95  # Epic climax
+  climax_chapter: 10  # Late climax for maximum drama
+
+# Evolve parameters over the 6-hour journey
+parameter_evolution:
+  tempo: true      # Tempo builds with intensity
+  polyphony: true  # More voices as it builds
+  velocity: true   # Dynamics increase
+  register: true   # Rise in pitch for climax
+
+# Chaos parameters for organic feel
+chaos:
+  logistic_r: 3.82  # Slightly less chaotic - more controlled epic feel
+  lorenz_sigma: 12.0  # Smoother modulation
+  lorenz_rho: 30.0
+  lorenz_beta: 2.8
+
+# Heroic motif pattern
+motif:
+  core_pattern: [0, 2, 4, 7, 9]  # Pentatonic-ish, heroic intervals
+  interval_minutes: 15  # Frequent return of heroic theme
+  register_shift_prime_mod: 3  # Dramatic register shifts
+  ornament_density_mod: 7  # Ornamentation on key primes

@@ -1,0 +1,92 @@
+name: "Tavern Carousing"
+description: "Lively, upbeat tavern atmosphere - ale, laughter, and merriment"
+
+# Bright, jovial mode
+modal_center: 'D_dorian'  # Bright minor - cheerful yet grounded
+
+# Simple triadic harmony - folk-like
+harmony_rules:
+  type: 'tertian'
+  intervals: [0, 2, 4]  # Major/minor triads
+  variation: 'open_voicing'
+  variation_intervals: [0, 4]  # Fifths for rustic feel
+  variation_mod: 5
+
+# Upbeat, bouncy rhythms
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 8  # Shorter - more rhythmic activity
+    prime_mod_factor: 4
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 6
+    base_unit: 0.5  # Moderate note lengths
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 6
+    cc_event_interval: 2
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.75  # More frequent events (clinking mugs, laughter)
+    event_count: 128
+
+# Folk/tavern instrumentation
+ensemble_gm:
+  harmonic_bed: 24      # Acoustic Guitar (nylon) - folk strumming
+  melodic_texture: 73   # Flute - cheerful melody
+  drones: 32            # Acoustic Bass - walking bass
+  ambient_events: 13    # Vibraphone - percussive accents
+
+# Upbeat tempo
+tempo:
+  base: 112  # Lively, danceable
+  variation_range: [108, 120]
+
+# Moderate dynamics - energetic but not overwhelming
+dynamics:
+  harmonic_bed:
+    base_velocity: 60
+    prime_mod_range: 25
+
+  melodic_texture:
+    base_velocity: 70  # Cheerful melody
+    prime_mod_range: 20
+
+  drones:
+    velocity: 55  # Steady bass
+
+  ambient_events:
+    base_velocity: 65
+    intensity_scaling: 25
+
+# Flat arc - consistent merriment
+structural_arc:
+  type: 'flat'
+  min_intensity: 0.6
+  max_intensity: 0.7
+  climax_chapter: 6
+
+# Minimal evolution - keep it steady
+parameter_evolution:
+  tempo: false      # Consistent tempo
+  polyphony: false
+  velocity: true    # Slight dynamic variation
+  register: false
+
+# Moderate chaos for organic feel
+chaos:
+  logistic_r: 3.75  # Less chaotic - more predictable
+  lorenz_sigma: 8.0
+  lorenz_rho: 24.0
+  lorenz_beta: 2.5
+
+# Simple, memorable folk motif
+motif:
+  core_pattern: [0, 2, 4, 2, 0]  # Simple up-down melody
+  interval_minutes: 0.5  # Frequent repetition (every 30 seconds)
+  register_shift_prime_mod: 7
+  ornament_density_mod: 3  # Some ornamentation

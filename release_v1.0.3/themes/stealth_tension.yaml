@@ -1,0 +1,92 @@
+name: "Stealth & Tension"
+description: "Sparse, tense atmosphere for sneaking - every sound matters"
+
+# Dark, mysterious mode
+modal_center: 'A_aeolian'  # Natural minor - dark and tense
+
+# Sparse, ambiguous harmony
+harmony_rules:
+  type: 'quartal'
+  intervals: [0, 3]  # Just root and fourth - very sparse
+  variation: 'single_note'
+  variation_intervals: [0]  # Sometimes just single notes
+  variation_mod: 3
+
+# Very sparse rhythmic activity
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 64  # Very long - minimal movement
+    prime_mod_factor: 16
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 8
+    base_unit: 1.5  # Long, sustained notes
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 12  # Very long drones
+    cc_event_interval: 8
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.92  # Rare, startling events
+    event_count: 32  # Minimal events
+
+# Minimal, atmospheric instrumentation
+ensemble_gm:
+  harmonic_bed: 95      # Pad 8 (sweep) - eerie background
+  melodic_texture: 98   # FX 3 (crystal) - delicate high notes
+  drones: 91            # Pad 4 (choir) - dark sustain
+  ambient_events: 14    # Tubular Bells - distant metallic sounds
+
+# Slow, creeping tempo
+tempo:
+  base: 48  # Very slow, tense
+  variation_range: [44, 52]
+
+# Very quiet dynamics - almost whispered
+dynamics:
+  harmonic_bed:
+    base_velocity: 25  # Very quiet
+    prime_mod_range: 15
+
+  melodic_texture:
+    base_velocity: 30  # Delicate
+    prime_mod_range: 20
+
+  drones:
+    velocity: 28
+
+  ambient_events:
+    base_velocity: 40  # Sudden but not too loud
+    intensity_scaling: 35
+
+# Flat, sustained tension
+structural_arc:
+  type: 'flat'
+  min_intensity: 0.3
+  max_intensity: 0.4
+  climax_chapter: 6
+
+# Minimal evolution - keep tension constant
+parameter_evolution:
+  tempo: false
+  polyphony: false
+  velocity: true    # Slight dynamic shifts
+  register: false
+
+# Controlled chaos - tense but not random
+chaos:
+  logistic_r: 3.82
+  lorenz_sigma: 9.0
+  lorenz_rho: 26.0
+  lorenz_beta: 2.6
+
+# Sparse, haunting motif
+motif:
+  core_pattern: [0, 2, 3]  # Small intervals - creeping
+  interval_minutes: 2.0  # Infrequent - every 2 minutes
+  register_shift_prime_mod: 11  # Rare shifts
+  ornament_density_mod: 17  # Almost no ornaments

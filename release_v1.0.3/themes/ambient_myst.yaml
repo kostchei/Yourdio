@@ -1,0 +1,85 @@
+# ============================================================================
+# AMBIENT MYST
+# ============================================================================
+# Inspired by Myst (1993) - mysterious, contemplative, slightly unsettling
+# ============================================================================
+
+name: "Ambient Myst"
+description: "Mysterious island atmosphere with crystalline textures"
+
+modal_center: 'A_aeolian'  # Natural minor - melancholic, mysterious
+
+harmony_rules:
+  type: 'quartal'
+  intervals: [0, 3, 6]      # Open fourths - ambiguous, floating
+  variation: 'quintal'
+  variation_intervals: [0, 4, 8]  # Perfect fifths - more stable moments
+  variation_chance_mod: 5
+
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 40       # Slower chord changes
+    prime_mod_factor: 12
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 8
+    base_unit: 0.3          # Slightly elongated notes
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 5  # Very long drones
+    cc_event_interval: 4
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.90         # Rare, mysterious sounds
+    event_count: 48
+
+ensemble_gm:
+  harmonic_bed: 88      # Pad 1 (new age) - crystalline
+  melodic_texture: 98   # FX 3 (crystal) - bell-like
+  drones: 90            # Pad 3 (polysynth) - ethereal
+  ambient_events: 97    # FX 2 (soundtrack) - cinematic swells
+
+tempo:
+  base: 52
+  variation_range: [48, 56]
+
+dynamics:
+  harmonic_bed:
+    base_velocity: 40
+    prime_mod_range: 15
+  melodic_texture:
+    base_velocity: 50
+    prime_mod_range: 20
+  drones:
+    velocity: 45
+  ambient_events:
+    base_velocity: 55
+    intensity_scaling: 25
+
+structural_arc:
+  type: 'parabolic'
+  min_intensity: 0.15     # Very calm start
+  max_intensity: 0.75     # Moderate climax (not overwhelming)
+  climax_chapter: 6
+
+parameter_evolution:
+  tempo: true
+  polyphony: true
+  velocity: true
+  register: false         # Keep register stable for consistency
+
+chaos:
+  logistic_r: 3.86
+  lorenz_sigma: 10.0
+  lorenz_rho: 28.0
+  lorenz_beta: 2.666
+
+motif:
+  core_pattern: [0, 2, 5, 7]  # Aeolian scale degrees
+  interval_minutes: 19        # Rare motif appearances
+  register_shift_prime_mod: 3
+  ornament_density_mod: 7     # Sparse ornamentation

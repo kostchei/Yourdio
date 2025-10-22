@@ -5,6 +5,16 @@ All notable changes to Yourdio will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2024-10-22
+
+### Fixed
+- GitHub Actions automated release workflow now has proper permissions
+- Fixed 403 Forbidden error preventing automated release creation
+- Fixed Black formatting in analyze_reference.py
+
+### Changed
+- Added `permissions: contents: write` to build-windows job in release workflow
+
 ## [1.0.3] - 2024-10-22
 
 ### Fixed

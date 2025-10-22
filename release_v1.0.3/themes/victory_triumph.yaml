@@ -1,0 +1,92 @@
+name: "Victory Fanfare"
+description: "Triumphant, celebratory - for winning battles or completing quests"
+
+# Bright, triumphant mode
+modal_center: 'D_dorian'  # Bright minor with major feeling
+
+# Full, rich triadic harmony
+harmony_rules:
+  type: 'tertian'
+  intervals: [0, 2, 4, 6]  # Full 7th chords - rich harmony
+  variation: 'open_voicing'
+  variation_intervals: [0, 4, 7]  # Open triads
+  variation_mod: 2
+
+# Bold, fanfare-like rhythms
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 8  # Moderate pace
+    prime_mod_factor: 4
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 5
+    base_unit: 0.75  # Bold, clear notes
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 4
+    cc_event_interval: 2
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.80
+    event_count: 64
+
+# Triumphant brass and orchestra
+ensemble_gm:
+  harmonic_bed: 48      # String Ensemble - rich foundation
+  melodic_texture: 56   # Trumpet - heroic fanfare
+  drones: 58            # Trombone - brass bass
+  ambient_events: 47    # Timpani - celebratory drums
+
+# Bold, triumphant tempo
+tempo:
+  base: 120  # Energetic, victorious
+  variation_range: [116, 126]
+
+# Loud, celebratory dynamics
+dynamics:
+  harmonic_bed:
+    base_velocity: 80
+    prime_mod_range: 20
+
+  melodic_texture:
+    base_velocity: 95  # Triumphant trumpet
+    prime_mod_range: 20
+
+  drones:
+    velocity: 75
+
+  ambient_events:
+    base_velocity: 90
+    intensity_scaling: 25
+
+# Peak intensity - pure celebration
+structural_arc:
+  type: 'flat'
+  min_intensity: 0.85
+  max_intensity: 0.90
+  climax_chapter: 6
+
+# Full evolution for maximum impact
+parameter_evolution:
+  tempo: true
+  polyphony: true
+  velocity: true
+  register: true
+
+# Moderate chaos - celebratory but controlled
+chaos:
+  logistic_r: 3.70
+  lorenz_sigma: 10.0
+  lorenz_rho: 28.0
+  lorenz_beta: 2.7
+
+# Bold, ascending victorious motif
+motif:
+  core_pattern: [0, 2, 4, 7, 9, 11]  # Ascending scale - triumphant
+  interval_minutes: 0.2  # Very frequent - every 12 seconds
+  register_shift_prime_mod: 3
+  ornament_density_mod: 5

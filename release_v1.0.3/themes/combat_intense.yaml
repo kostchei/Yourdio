@@ -1,0 +1,92 @@
+name: "Intense Combat"
+description: "Fast-paced, aggressive battle music - swords clashing, adrenaline pumping"
+
+# Dark, aggressive mode
+modal_center: 'E_phrygian'  # Dark, exotic, menacing
+
+# Dissonant, tense harmony
+harmony_rules:
+  type: 'dissonant_clusters'
+  intervals: [0, 1, 3, 6]  # Minor seconds and tritones - very tense
+  variation: 'power_chords'
+  variation_intervals: [0, 4]  # Occasional power chords for impact
+  variation_mod: 2  # Frequent variation
+
+# Fast, driving rhythms
+rhythmic_language:
+  harmonic_bed:
+    type: 'prime_modulated'
+    base_duration: 4  # Very short - rapid fire
+    prime_mod_factor: 2
+
+  melodic_texture:
+    type: 'fibonacci'
+    sequence_length: 5
+    base_unit: 0.125  # Very fast notes
+
+  drones:
+    type: 'lorenz_attractor'
+    duration_multiplier: 2  # Shorter drones for urgency
+    cc_event_interval: 1  # Rapid filter changes
+
+  ambient_events:
+    type: 'logistic_map'
+    threshold: 0.70  # Very frequent dramatic hits
+    event_count: 256  # Lots of action
+
+# Aggressive instrumentation
+ensemble_gm:
+  harmonic_bed: 29      # Overdriven Guitar - aggressive rhythm
+  melodic_texture: 56   # Trumpet - urgent brass stabs
+  drones: 38            # Synth Bass - driving low end
+  ambient_events: 47    # Timpani - battle percussion
+
+# Fast, aggressive tempo
+tempo:
+  base: 140  # Fast, intense
+  variation_range: [136, 148]
+
+# High dynamics - loud and aggressive
+dynamics:
+  harmonic_bed:
+    base_velocity: 85  # Very loud
+    prime_mod_range: 30
+
+  melodic_texture:
+    base_velocity: 95  # Screaming brass
+    prime_mod_range: 25
+
+  drones:
+    velocity: 80  # Pounding bass
+
+  ambient_events:
+    base_velocity: 100  # Maximum impact
+    intensity_scaling: 27
+
+# High intensity throughout - no letup
+structural_arc:
+  type: 'flat'
+  min_intensity: 0.85
+  max_intensity: 0.95
+  climax_chapter: 6
+
+# Maximize evolution for chaos
+parameter_evolution:
+  tempo: true       # Tempo can surge
+  polyphony: true   # More voices = more chaos
+  velocity: true    # Dynamic spikes
+  register: true    # Register shifts for drama
+
+# Maximum chaos for unpredictability
+chaos:
+  logistic_r: 3.95  # Near-chaotic regime
+  lorenz_sigma: 15.0  # Turbulent
+  lorenz_rho: 32.0
+  lorenz_beta: 3.2
+
+# Aggressive, angular motif
+motif:
+  core_pattern: [0, 1, 6, 3, 0]  # Dissonant intervals - tritone, minor 2nd
+  interval_minutes: 0.25  # Every 15 seconds - relentless
+  register_shift_prime_mod: 2  # Frequent octave jumps
+  ornament_density_mod: 2  # Lots of rapid ornaments
