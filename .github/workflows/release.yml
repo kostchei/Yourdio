@@ -29,6 +29,8 @@ jobs:
   build-windows:
     runs-on: windows-latest
     needs: test  # Only build if tests pass
+    permissions:
+      contents: write  # Required to create releases
 
     steps:
     - name: Checkout code
