@@ -5,6 +5,17 @@ All notable changes to Yourdio will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2024-10-22
+
+### Fixed
+- Test suite now matches actual code implementation
+- Fixed 6 failing tests in test_event_generator.py and test_theme_loader.py
+- All 17 tests now pass successfully
+
+### Changed
+- Updated event generator tests to match actual event structure
+- Removed 'description' from required keys in DEFAULT_THEME tests
+
 ## [1.0.2] - 2024-10-22
 
 ### Added
