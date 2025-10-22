@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yourdio"
-version = "1.0.4"
+version = "1.0.5"
 description = "Retro Lo-Fi algorithmic MIDI music generator with chaos theory and prime number sequences"
 readme = "README.md"
 license = {text = "MIT"}

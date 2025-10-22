@@ -5,6 +5,21 @@ All notable changes to Yourdio will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2024-10-22
+
+### Added
+- MIDI Player tab with full playback controls
+- Play, Stop, and Pause buttons for MIDI playback
+- Volume slider with percentage display (0-100%)
+- File browser to load and play any MIDI file
+- Real-time playback status display
+- Green chord symbol icon for Windows executable
+
+### Changed
+- Updated GUI from 2 tabs to 3 tabs (Theme Generator, Event Soundscapes, MIDI Player)
+- Updated build script to include custom icon
+- Integrated pygame mixer for MIDI playback
+
 ## [1.0.4] - 2024-10-22
 
 ### Fixed

@@ -19,7 +19,7 @@ def build_exe():
         "--name=Yourdio",  # Executable name
         "--onefile",  # Single file executable
         "--windowed",  # No console window
-        "--icon=NONE",  # No icon (can add one later)
+        f"--icon={script_dir / 'yourdio_icon.ico'}",  # Green chord icon
         "--clean",  # Clean cache
         "--noconfirm",  # Overwrite without asking
         # Hidden imports that might not be detected automatically

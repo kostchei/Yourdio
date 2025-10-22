@@ -19,7 +19,7 @@ Author: Yourdio Contributors
 License: MIT
 """
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 __author__ = "Yourdio Contributors"
 __license__ = "MIT"
 
@@ -29,6 +29,7 @@ import threading
 import yaml
 from pathlib import Path
 from typing import Dict, Any
+import pygame
 
 from yourdio import generate_full_composition
 from event_generator import EventSoundscapeGenerator
@@ -100,6 +101,13 @@ class YourdioGUI:
         self.current_theme = ThemeLoader.DEFAULT_THEME.copy()
         self.theme_file_path = None
 
+        # Initialize pygame mixer for MIDI playback
+        pygame.mixer.init()
+
+        # Player state
+        self.current_midi_file = None
+        self.is_playing = False
+
         # Build UI
         self.build_ui()
 
@@ -159,6 +167,11 @@ class YourdioGUI:
         self.event_tab = tk.Frame(self.notebook, bg=RetroStyle.BG_MEDIUM)
         self.notebook.add(self.event_tab, text=" ⚡ EVENT SOUNDSCAPES ")
         self.build_event_tab()
+
+        # Tab 3: MIDI Player
+        self.player_tab = tk.Frame(self.notebook, bg=RetroStyle.BG_MEDIUM)
+        self.notebook.add(self.player_tab, text=" ▶ MIDI PLAYER ")
+        self.build_player_tab()
 
     def build_theme_tab(self):
         """Build the 6-hour theme generator interface"""
@@ -520,6 +533,160 @@ class YourdioGUI:
             justify=tk.LEFT,
         )
         self.event_info_label.pack(fill=tk.BOTH, expand=True)
+
+    def build_player_tab(self):
+        """Build the MIDI player interface"""
+        # Main container
+        main_frame = tk.Frame(self.player_tab, bg=RetroStyle.BG_MEDIUM)
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+
+        # === FILE SELECTION ===
+        file_frame = self.create_panel(main_frame, "SELECT MIDI FILE")
+
+        # Current file display
+        self.player_file_var = tk.StringVar(value="No file loaded")
+        file_display = tk.Label(
+            file_frame,
+            textvariable=self.player_file_var,
+            font=("Courier", 10),
+            fg=RetroStyle.LCD_TEXT,
+            bg=RetroStyle.LCD_BG,
+            relief=tk.SUNKEN,
+            bd=2,
+            anchor=tk.W,
+            padx=10,
+            pady=10,
+        )
+        file_display.pack(fill=tk.X, pady=10)
+
+        # Browse button
+        tk.Button(
+            file_frame,
+            text="📂 BROWSE FOR MIDI FILE",
+            command=self.browse_midi_file,
+            bg=RetroStyle.BUTTON_BG,
+            fg=RetroStyle.TEXT_BRIGHT,
+            activebackground=RetroStyle.BUTTON_ACTIVE,
+            font=("Courier", 11, "bold"),
+            relief=tk.RAISED,
+            bd=3,
+            height=2,
+        ).pack(fill=tk.X, pady=5)
+
+        # === PLAYBACK CONTROLS ===
+        controls_frame = self.create_panel(main_frame, "PLAYBACK CONTROLS")
+
+        # Button row
+        button_row = tk.Frame(controls_frame, bg=RetroStyle.BG_LIGHT)
+        button_row.pack(pady=20)
+
+        # Play button
+        self.play_button = tk.Button(
+            button_row,
+            text="▶ PLAY",
+            command=self.play_midi,
+            bg=RetroStyle.ACCENT_GREEN,
+            fg=RetroStyle.BG_DARK,
+            activebackground=RetroStyle.ACCENT_CYAN,
+            font=("Courier", 14, "bold"),
+            relief=tk.RAISED,
+            bd=4,
+            width=12,
+            height=2,
+        )
+        self.play_button.pack(side=tk.LEFT, padx=10)
+
+        # Stop button
+        self.stop_button = tk.Button(
+            button_row,
+            text="■ STOP",
+            command=self.stop_midi,
+            bg=RetroStyle.ACCENT_ORANGE,
+            fg=RetroStyle.BG_DARK,
+            activebackground=RetroStyle.ACCENT_CYAN,
+            font=("Courier", 14, "bold"),
+            relief=tk.RAISED,
+            bd=4,
+            width=12,
+            height=2,
+            state=tk.DISABLED,
+        )
+        self.stop_button.pack(side=tk.LEFT, padx=10)
+
+        # Pause button
+        self.pause_button = tk.Button(
+            button_row,
+            text="⏸ PAUSE",
+            command=self.pause_midi,
+            bg=RetroStyle.ACCENT_CYAN,
+            fg=RetroStyle.BG_DARK,
+            activebackground=RetroStyle.ACCENT_GREEN,
+            font=("Courier", 14, "bold"),
+            relief=tk.RAISED,
+            bd=4,
+            width=12,
+            height=2,
+            state=tk.DISABLED,
+        )
+        self.pause_button.pack(side=tk.LEFT, padx=10)
+
+        # === VOLUME CONTROL ===
+        volume_frame = self.create_panel(main_frame, "VOLUME")
+
+        # Volume slider
+        vol_container = tk.Frame(volume_frame, bg=RetroStyle.BG_LIGHT)
+        vol_container.pack(fill=tk.X, padx=20, pady=20)
+
+        tk.Label(
+            vol_container,
+            text="🔊 VOLUME:",
+            font=("Courier", 12, "bold"),
+            fg=RetroStyle.TEXT_BRIGHT,
+            bg=RetroStyle.BG_LIGHT,
+        ).pack(side=tk.LEFT, padx=10)
+
+        self.volume_var = tk.DoubleVar(value=0.7)
+        self.volume_label = tk.Label(
+            vol_container,
+            text="70%",
+            font=("Courier", 12, "bold"),
+            fg=RetroStyle.ACCENT_CYAN,
+            bg=RetroStyle.BG_LIGHT,
+            width=6,
+        )
+        self.volume_label.pack(side=tk.RIGHT, padx=10)
+
+        volume_slider = tk.Scale(
+            vol_container,
+            from_=0,
+            to=1,
+            resolution=0.01,
+            orient=tk.HORIZONTAL,
+            variable=self.volume_var,
+            showvalue=False,
+            command=self.update_volume,
+            bg=RetroStyle.BG_LIGHT,
+            fg=RetroStyle.TEXT_BRIGHT,
+            troughcolor=RetroStyle.LCD_BG,
+            activebackground=RetroStyle.ACCENT_GREEN,
+            highlightthickness=0,
+            length=300,
+        )
+        volume_slider.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=10)
+
+        # === STATUS ===
+        status_frame = self.create_panel(main_frame, "STATUS")
+
+        self.player_status_var = tk.StringVar(value="Ready to play")
+        status_label = tk.Label(
+            status_frame,
+            textvariable=self.player_status_var,
+            font=("Courier", 11),
+            fg=RetroStyle.ACCENT_GREEN,
+            bg=RetroStyle.BG_LIGHT,
+            pady=20,
+        )
+        status_label.pack(fill=tk.BOTH, expand=True)
 
     def build_footer(self):
         """Build status footer"""
@@ -927,6 +1094,88 @@ class YourdioGUI:
 
         thread = threading.Thread(target=generate, daemon=True)
         thread.start()
+
+    # === PLAYER TAB FUNCTIONS ===
+
+    def browse_midi_file(self):
+        """Browse for MIDI file to play"""
+        filename = filedialog.askopenfilename(
+            title="Select MIDI File",
+            filetypes=[("MIDI files", "*.mid *.midi"), ("All files", "*.*")],
+            initialdir=".",
+        )
+
+        if filename:
+            self.current_midi_file = filename
+            self.player_file_var.set(Path(filename).name)
+            self.player_status_var.set(f"Loaded: {Path(filename).name}")
+            self.log(f"Loaded MIDI: {filename}")
+            # Enable play button
+            self.play_button.config(state=tk.NORMAL)
+
+    def play_midi(self):
+        """Play the loaded MIDI file"""
+        if not self.current_midi_file:
+            messagebox.showwarning("No File", "Please load a MIDI file first!")
+            return
+
+        try:
+            if self.is_playing and pygame.mixer.music.get_busy():
+                # Unpause if paused
+                pygame.mixer.music.unpause()
+                self.player_status_var.set("Playing...")
+            else:
+                # Load and play
+                pygame.mixer.music.load(self.current_midi_file)
+                pygame.mixer.music.set_volume(self.volume_var.get())
+                pygame.mixer.music.play()
+                self.player_status_var.set("Playing...")
+                self.is_playing = True
+
+            # Update button states
+            self.play_button.config(state=tk.DISABLED)
+            self.stop_button.config(state=tk.NORMAL)
+            self.pause_button.config(state=tk.NORMAL)
+
+            self.log(f"Playing: {Path(self.current_midi_file).name}")
+
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to play MIDI:\n{e}")
+            self.log(f"ERROR: {e}")
+
+    def stop_midi(self):
+        """Stop MIDI playback"""
+        pygame.mixer.music.stop()
+        self.is_playing = False
+        self.player_status_var.set("Stopped")
+
+        # Update button states
+        self.play_button.config(state=tk.NORMAL)
+        self.stop_button.config(state=tk.DISABLED)
+        self.pause_button.config(state=tk.DISABLED)
+
+        self.log("Playback stopped")
+
+    def pause_midi(self):
+        """Pause/unpause MIDI playback"""
+        if pygame.mixer.music.get_busy():
+            pygame.mixer.music.pause()
+            self.player_status_var.set("Paused")
+            self.play_button.config(state=tk.NORMAL)
+            self.pause_button.config(state=tk.DISABLED)
+            self.log("Playback paused")
+        else:
+            pygame.mixer.music.unpause()
+            self.player_status_var.set("Playing...")
+            self.play_button.config(state=tk.DISABLED)
+            self.pause_button.config(state=tk.NORMAL)
+            self.log("Playback resumed")
+
+    def update_volume(self, value):
+        """Update playback volume"""
+        volume = float(value)
+        pygame.mixer.music.set_volume(volume)
+        self.volume_label.config(text=f"{int(volume * 100)}%")
 
 
 def main():
