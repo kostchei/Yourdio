@@ -17,7 +17,7 @@ class TestEventGenerator:
 
     def test_all_events_have_required_keys(self):
         """Verify all event configs have required keys"""
-        required_keys = ["description", "duration_minutes", "modifications"]
+        required_keys = ["description", "duration_minutes", "primes", "chaos_seed"]
         for event_name, config in EventSoundscapeGenerator.EVENT_CONFIGS.items():
             for key in required_keys:
                 assert key in config, f"Event '{event_name}' missing key: {key}"
@@ -31,29 +31,30 @@ class TestEventGenerator:
             ), f"Event '{event_name}' duration is not a number"
             assert duration > 0, f"Event '{event_name}' has non-positive duration"
 
-    def test_combat_intense_exists(self):
-        """Verify combat_intense event is defined"""
-        assert "combat_intense" in EventSoundscapeGenerator.EVENT_CONFIGS
-        combat = EventSoundscapeGenerator.EVENT_CONFIGS["combat_intense"]
-        assert "tempo" in combat["modifications"]
+    def test_fight_event_exists(self):
+        """Verify fight event is defined"""
+        assert "fight" in EventSoundscapeGenerator.EVENT_CONFIGS
+        fight = EventSoundscapeGenerator.EVENT_CONFIGS["fight"]
+        assert fight["description"] == "Intense combat music"
 
-    def test_stealth_tension_exists(self):
-        """Verify stealth_tension event is defined"""
-        assert "stealth_tension" in EventSoundscapeGenerator.EVENT_CONFIGS
-        stealth = EventSoundscapeGenerator.EVENT_CONFIGS["stealth_tension"]
-        assert "dynamics" in stealth["modifications"]
+    def test_stealth_event_exists(self):
+        """Verify stealth event is defined"""
+        assert "stealth" in EventSoundscapeGenerator.EVENT_CONFIGS
+        stealth = EventSoundscapeGenerator.EVENT_CONFIGS["stealth"]
+        assert "description" in stealth
 
-    def test_tavern_carousing_exists(self):
-        """Verify tavern_carousing event is defined"""
-        assert "tavern_carousing" in EventSoundscapeGenerator.EVENT_CONFIGS
+    def test_carousing_event_exists(self):
+        """Verify carousing event is defined"""
+        assert "carousing" in EventSoundscapeGenerator.EVENT_CONFIGS
 
-    def test_modifications_are_dicts(self):
-        """Verify all modification entries are dictionaries"""
+    def test_primes_are_lists(self):
+        """Verify all prime entries are lists"""
         for event_name, config in EventSoundscapeGenerator.EVENT_CONFIGS.items():
-            mods = config["modifications"]
-            assert isinstance(mods, dict), f"Event '{event_name}' modifications is not a dict"
+            primes = config["primes"]
+            assert isinstance(primes, list), f"Event '{event_name}' primes is not a list"
+            assert len(primes) > 0, f"Event '{event_name}' has empty primes list"
 
     def test_event_count(self):
         """Verify expected number of event types"""
-        # Based on the documentation, there should be 8 event types
-        assert len(EventSoundscapeGenerator.EVENT_CONFIGS) >= 6, "Expected at least 6 event types"
+        # Should have 8 event types
+        assert len(EventSoundscapeGenerator.EVENT_CONFIGS) == 8, "Expected 8 event types"

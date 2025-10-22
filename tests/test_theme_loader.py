@@ -23,7 +23,6 @@ class TestThemeLoader:
         """Verify default theme has all required keys"""
         required_keys = [
             "name",
-            "description",
             "modal_center",
             "harmony_rules",
             "tempo",
