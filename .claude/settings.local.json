@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Read(//d/Code/**)",
+      "Bash(powershell -Command:*)",
+      "Bash(ls:*)",
+      "Bash(python audio_to_midi_advanced.py:*)",
+      "Bash(\"d:/Code/Yourdio/venv_yourdio/Scripts/python.exe\":*)",
+      "Bash(../Yourdio/venv_yourdio/Scripts/python.exe:*)",
+      "Bash(python3:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
