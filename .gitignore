@@ -30,7 +30,19 @@ events_output/
 *.mid
 *.midi
 
-# Archived files
+# Audio files (large, don't commit)
+*.mp3
+*.ogg
+*.wav
+*.flac
+*.m4a
+*.aac
+
+# Archive files (large, don't commit)
+*.7z
+*.zip
+*.rar
+*.tar.gz
 *.archive
 
 # OS files
