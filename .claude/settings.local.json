@@ -8,7 +8,8 @@
       "Bash(python audio_to_midi_advanced.py:*)",
       "Bash(\"d:/Code/Yourdio/venv_yourdio/Scripts/python.exe\":*)",
       "Bash(../Yourdio/venv_yourdio/Scripts/python.exe:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(timeout 10 python3:*)"
     ],
     "deny": [],
     "ask": []
