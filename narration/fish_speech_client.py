@@ -103,6 +103,8 @@ class NarrationClient:
         seed: Optional[int] = None,
         reference_audio: Optional[bytes] = None,
         reference_text: Optional[str] = None,
+        references_list: Optional[list] = None,
+        request_timeout: float = 120.0,
     ) -> Path:
         """
         Synthesise *text* and save the result to *output_path*.
@@ -120,6 +122,8 @@ class NarrationClient:
         seed             : Fixed seed for deterministic output (``None`` = random).
         reference_audio  : Raw bytes of a reference WAV for zero-shot voice cloning.
         reference_text   : Transcript of the reference audio.
+        references_list  : List of dictionaries with "audio" and "text" keys for multiple references.
+        request_timeout  : HTTP timeout in seconds for the TTS request.
 
         Returns
         -------
@@ -133,7 +137,7 @@ class NarrationClient:
             )
 
         # Build request payload
-        references = []
+        references = references_list or []
         if reference_audio is not None:
             references.append(
                 {"audio": reference_audio, "text": reference_text or ""}
@@ -160,7 +164,7 @@ class NarrationClient:
             params={"format": "msgpack"},
             data=packed,
             headers=self._headers,
-            timeout=120,
+            timeout=request_timeout,
         )
 
         if response.status_code != 200:
@@ -171,7 +175,7 @@ class NarrationClient:
         out = Path(output_path)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_bytes(response.content)
-        print(f"[NarrationClient] Saved {len(response.content):,} bytes → {out}")
+        print(f"[NarrationClient] Saved {len(response.content):,} bytes -> {out}")
         return out
 
     # ── server lifecycle ─────────────────────────────────────────────────────────

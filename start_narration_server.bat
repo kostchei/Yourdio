@@ -19,6 +19,10 @@ echo  Listening on: http://127.0.0.1:8080
 echo ======================================================
 echo.
 
+echo Stopping existing Fish Speech API server processes...
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'tools[\\/]api_server\.py' -and $_.CommandLine -like '*fish-speech*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }"
+
 cd /d "%FISH_DIR%"
 conda run -n fish-speech --no-capture-output python tools\api_server.py ^
     --listen 127.0.0.1:8080 ^
