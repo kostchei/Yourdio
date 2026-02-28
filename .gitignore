@@ -12,6 +12,13 @@ build/
 venv/
 env/
 ENV/
+.venv/
+venv*/
+.venv*/
+env*/
+ENV*/
+venv_demucs/
+venv_yourdio/
 
 # IDE
 .vscode/
